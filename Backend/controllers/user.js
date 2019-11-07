@@ -25,3 +25,34 @@ exports.signup = (request, response, next) => {
         response.status(500).json({ error: error });
     })
 }
+
+exports.login = (request, response, next) => {
+    try {
+    const values = request.body.email;
+    pool.query("SELECT u.email, u.password FROM users u WHERE u.email = $1 LIMIT 1", [values], (error, results) => {
+        if(results.rows.length === 0){
+                return response.json({
+                    error: 'Invalid email'
+                });
+            }
+            
+        bcrypt.compare(request.body.password, results.rows[0].password, (error, result) => {
+            if(result === false){
+                return response.send({
+                    success: false,
+                    error: 'Invalid password'
+                });
+            }
+                return response.send({
+                    success: true,
+                    message: 'Log in Successful!'
+                });
+            });
+        });
+    }catch (error) {
+        return response.json({
+            error: 'Ooops... Something went wrong!'
+        });
+    }
+}
+  
