@@ -9,7 +9,7 @@ exports.createGif = (request, response, next) => {
                 response.status(400).json({ error: 'Post failed!'});
             } else {
                 cloudinary.uploader.upload(request.body.url, (error, result) => {
-                response.json({ 
+                response.status(201).json({ 
                     status: 'Success',
                     Data: {
                     gifid: result.public_id,

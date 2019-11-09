@@ -8,7 +8,7 @@ exports.createArticle = (request, response, next) => {
             if (error) {
                 response.status(400).json({ error: 'Post failed!' });
             }else {
-                response.json({ 
+                response.status(201).json({ 
                     status: 'Success!',
                     Data: {
                     message: 'Article successfully posted!',
@@ -27,13 +27,29 @@ exports.updateArticle = (request, response, next) => {
     [...values, id], (error, results) => {
         if (error){
             response.status(400).json({ error: 'Failed to update!' });
-        }else {
-            response.json({ 
-                status: 'Success',
-                Data: {
-                message: 'Article successfully updated!',
-                title: request.body.title,
-                article: request.body.article
+            } else {
+                response.status(201).json({ 
+                    status: 'Success',
+                    Data: {
+                    message: 'Article successfully updated!',
+                    title: request.body.title,
+                    article: request.body.article
+                    }
+                });
+            }
+    })
+}
+
+exports.deleteOneArticle = (request, response, next) => {
+    const values = parseInt(request.params.id);
+    pool.query('DELETE FROM articles where articleid = $1', [values], (error, results) => {
+        if (error){
+            response.status(400).json({ error: 'Failed to delete Article!'});
+            } else {
+                response.status(200).json({ 
+                    status: 'Success!',
+                    Data: {
+                    message: 'Deleted successfully!'
                 }
             });
         }

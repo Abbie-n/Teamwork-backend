@@ -23,6 +23,3 @@ describe('user sign up', () => {
             done();
          });
 });
-})
-
-
