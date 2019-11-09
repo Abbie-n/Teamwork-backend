@@ -4,7 +4,7 @@
   "description": "All backend activities will be carried out in this folder",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "./node_modules/mocha/bin/mocha || true",
     "lint": "eslint ."
   },
   "author": "AbbieN",
