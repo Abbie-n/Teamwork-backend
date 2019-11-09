@@ -7,5 +7,6 @@ const articleCtrl = require('../controllers/articles');
 
 router.post('/post', articleCtrl.createArticle);
 router.patch('/:id', articleCtrl.updateArticle);
+router.delete('/:id', articleCtrl.deleteOneArticle);
 
 module.exports = router;
