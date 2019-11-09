@@ -7,7 +7,6 @@ exports.signup = (request, response, next) => {
   bcrypt.hash(request.body.password, 10)
     .then((hash) => {
       const values = [request.body.username, request.body.firstname, request.body.lastname, request.body.email, hash, request.body.genderid, request.body.departmentid, request.body.jobrole_id, request.body.address]
-      
       pool.query( `INSERT INTO users (username, firstname, lastname, email, password, genderid, departmentid, roleid, address, created_at)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, now())`, [...values], (error, results) => {
         if(error) {
@@ -16,7 +15,7 @@ exports.signup = (request, response, next) => {
           });
         } else  {
           response.send({
-            success: true,
+            status: 'Success!',
             message: 'User created successfully!'
           }
           );
@@ -37,30 +36,31 @@ exports.login = (request, response, next) => {
                 });
             }
             
+            const token = jwt.sign(
+              { userId: request.body.userid },
+              process.env.TOKEN,
+              { expiresIn: '24h'}
+          );
+
+
         bcrypt.compare(request.body.password, results.rows[0].password, (error, result) => {
             if(result === false){
-                return response.send({
-                    success: false,
-                    error: 'Invalid password'
-                });
+              return response.send({
+                status: "Failed!",
+                error: 'Invalid password'
+              });
             }
-            });
 
-            const token = jwt.sign(
-                { userId: request.body.userid },
-                process.env.TOKEN,
-                { expiresIn: '24h'}
-            );
-
-            return response.send({
+            return response.json({
                 status: 'Success!',
                 message: 'Log in Successful!',
                 token: token,
                 userid: results.rows[0].userid
             });
         });
+      });
     }catch (error) {
-        return response.json({
+        return response.send({
             error: 'Ooops... Something went wrong!'
         });
     }
