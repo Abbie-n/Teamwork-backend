@@ -15,7 +15,7 @@ exports.signup = (request, response, next) => {
           });
         } else  {
           response.send({
-            status: 'Success!',
+            status: 'Success',
             message: 'User created successfully!'
           }
           );
