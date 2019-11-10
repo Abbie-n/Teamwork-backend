@@ -23,3 +23,41 @@ exports.createGif = (request, response, next) => {
         }
     })       
 }
+
+exports.deleteOneGif = (request, response, next) => {
+    const values = parseInt(request.params.id);
+    pool.query('DELETE FROM gifs WHERE gifid = $1', [values], (error, results) => {
+        if(error) {
+            response.status(400).json({ error: 'Cannot be deleted!'});
+        } else{
+            response.status(200).json({ 
+                status: 'Success!',
+                Data:  {
+                message: 'Gif post successfully deleted!'
+            } 
+            });
+        }
+    })
+}
+
+exports.createComment = (request, response, next) => {
+    const values = Object.values(request.body)
+    pool.query(`INSERT INTO gifcomments (created_on, comment, authorid, gifid)
+        VALUES (now(), $1, $2, $3)`,
+        [...values], (error, results) => {
+        if (error){
+            response.status(400).json({ error: 'Failed to post comment!'});
+            }else {
+                response.status(201).json({ 
+                    status : 'success',
+                    Data : {
+                    message: 'Comment successfully created!',
+                    createdOn: request.body.created_on,
+                    author: request.body.authorid,
+                    comment: request.body.comment
+                }
+            });
+        }
+    })
+}
+

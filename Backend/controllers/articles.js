@@ -55,3 +55,24 @@ exports.deleteOneArticle = (request, response, next) => {
         }
     })
 }
+
+exports.createComment = (request, response, next) => {
+    const values = Object.values(request.body)
+    pool.query(`INSERT INTO articlecomments (created_on, comment, authorid, articleid)
+        VALUES (now(), $1, $2, $3)`,
+        [...values], (error, results) => {
+        if (error){
+            response.status(400).json({ error: 'Failed to post comment!'});
+            }else {
+                response.status(201).json({ 
+                    status : 'success',
+                    Data : {
+                    message: 'Comment successfully created!',
+                    createdOn: request.body.created_on,
+                    author: request.body.authorid,
+                    comment: request.body.comment
+                }
+            });
+        }
+    })
+}

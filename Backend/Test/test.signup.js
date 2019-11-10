@@ -9,8 +9,8 @@ describe('user sign up', () => {
     it('creates users', (done) => {
     const userDetails = {
         // TEST WITH BASIC USER DETAILS, NOT ALL!
-        username: "Testie3",
-        email: "Testie3@test.com",
+        username: "Testie4",
+        email: "Testie4@test.com"
         password: "Testieequalstruthy"
     };
     chai.request(baseUrl)
@@ -23,3 +23,4 @@ describe('user sign up', () => {
             done();
          });
 });
+})
