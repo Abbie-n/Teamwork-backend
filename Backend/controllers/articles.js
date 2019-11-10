@@ -76,3 +76,20 @@ exports.createComment = (request, response, next) => {
         }
     })
 }
+
+exports.getOneArticle = (request, response, next) => {
+    const values = parseInt(request.params.id);
+    pool.query(`SELECT a.articleid, a.created_on, a.title, a.post, c.commentid, c.comment, c.authorid FROM articles a
+    JOIN articlecomments c
+    ON a.articleid = c.articleid
+    WHERE a.articleid = $1`, [values], (error, results) => {
+        if (error || results.rows < 1 ) {
+            response.status(404).json({ error: 'Article not found!'});
+        }else {
+            response.status(200).json({
+                status: 'Success',
+                Data: results.rows
+            });
+        }
+    })
+}
