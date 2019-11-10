@@ -10,7 +10,7 @@ describe('user sign up', () => {
     const userDetails = {
         // TEST WITH BASIC USER DETAILS, NOT ALL!
         username: "Testie4",
-        email: "Testie4@test.com",
+        email: "Testie4@test.com"
         password: "Testieequalstruthy"
     };
     chai.request(baseUrl)

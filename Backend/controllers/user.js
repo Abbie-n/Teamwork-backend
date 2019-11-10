@@ -10,12 +10,10 @@ exports.signup = (request, response, next) => {
       pool.query( `INSERT INTO users (username, firstname, lastname, email, password, genderid, departmentid, roleid, address, created_at)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, now())`, [...values], (error, results) => {
         if(error) {
-          response.status(400).json({
-            message: 'Failed to create User!'
-          });
+          response.send(error);
         } else  {
           response.send({
-            status: 'Success',
+            status: 'Success!',
             message: 'User created successfully!'
           }
           );
@@ -53,9 +51,11 @@ exports.login = (request, response, next) => {
 
             return response.json({
                 status: 'Success!',
-                message: 'Log in Successful!',
-                token: token,
-                userid: results.rows[0].userid
+                Data: {
+                  message: 'Log in Successful!',
+                  token: token,
+                  userid: results.rows[0].userid
+                }
             });
         });
       });
