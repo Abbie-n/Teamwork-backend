@@ -5,15 +5,16 @@ const baseUrl = 'http://localhost:5000/api/v1/auth';
 
 chai.use(chaihttp);
 chai.should();
-describe('user log in', () => {
-    it('logs in', (done) => {
+describe('user sign up', () => {
+    it('creates users', (done) => {
     const userDetails = {
-        // LOG IN TEST!
-        email: "Testie3@test.com",
+        // TEST WITH BASIC USER DETAILS, NOT ALL!
+        username: "Testie4",
+        email: "Testie4@test.com",
         password: "Testieequalstruthy"
     };
     chai.request(baseUrl)
-        .post('/login')
+        .post('/signup')
         .send(
            userDetails
         )

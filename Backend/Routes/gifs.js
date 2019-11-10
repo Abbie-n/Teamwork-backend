@@ -5,5 +5,6 @@ const gifCtrl = require('../controllers/gifs');
 
 // GIFS ROUTES
 router.post('/upload', gifCtrl.createGif);
+router.delete('/:id', gifCtrl.deleteOneGif);
 
 module.exports = router;

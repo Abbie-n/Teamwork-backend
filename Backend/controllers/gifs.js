@@ -23,3 +23,19 @@ exports.createGif = (request, response, next) => {
         }
     })       
 }
+
+exports.deleteOneGif = (request, response, next) => {
+    const values = parseInt(request.params.id);
+    pool.query('DELETE FROM gifs WHERE gifid = $1', [values], (error, results) => {
+        if(error) {
+            response.status(400).json({ error: 'Cannot be deleted!'});
+        } else{
+            response.status(200).json({ 
+                status: 'Success!',
+                Data:  {
+                message: 'Gif post successfully deleted!'
+            } 
+            });
+        }
+    })
+}

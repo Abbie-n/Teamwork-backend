@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.0",
+  "x-api-id": "teamwork-api",
+  "info": {
+    "version": "1.0.0",
+    "title": "Teamwork-API",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api/v1"
+    }
+  ],
+  "paths": {}
+}
