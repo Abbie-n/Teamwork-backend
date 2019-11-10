@@ -60,3 +60,20 @@ exports.createComment = (request, response, next) => {
         }
     })
 }
+
+exports.getOneGif = (request, response, next) => {
+    const values = parseInt(request.params.id);
+    pool.query(`SELECT g.gifid, g.created_on, g.title, g.post, c.commentid, c.comment, c.authorid FROM gifs g
+    JOIN gifcomments c
+    ON g.gifid = c.gifid
+    WHERE g.gifid = $1`, [values], (error, results) => {
+        if (error || results.rows < 1 ) {
+            response.status(404).json({ error: 'Gif not found!'});
+        }else {
+            response.status(200).json({
+                status: 'Success',
+                Data: results.rows
+            });
+        }
+    })
+}
