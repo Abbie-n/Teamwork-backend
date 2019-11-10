@@ -8,4 +8,5 @@ router.post('/upload', gifCtrl.createGif);
 router.delete('/:id', gifCtrl.deleteOneGif);
 router.post('/:id/comment', gifCtrl.createComment);
 
+
 module.exports = router;

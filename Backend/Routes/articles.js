@@ -10,4 +10,5 @@ router.patch('/:id', articleCtrl.updateArticle);
 router.delete('/:id', articleCtrl.deleteOneArticle);
 router.post('/:id/comment', articleCtrl.createComment);
 
+
 module.exports = router;
