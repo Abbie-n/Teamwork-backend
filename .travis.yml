@@ -9,4 +9,8 @@ install:
   - npm ci
 
 script:
+  - export COVERALLS_TOKEN
   - npm run test
+
+after_success:
+  - npm run coveralls
