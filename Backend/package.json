@@ -7,7 +7,7 @@
     "test": "nyc node_modules/.bin/mocha",
     "lint": "eslint . --fix",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov --all npm run test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "author": "AbbieN",
   "license": "MIT",
