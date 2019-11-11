@@ -6,11 +6,9 @@ env:
   - API_VERSION=v1
 
 install: 
-  - npm install
+  - npm ci
 
 script:
-  - export repo_token
-  - npm run test
+  - npm test:coveralls
 
-after_success:
-  - npm run coveralls
+repo_token: $repo_token
