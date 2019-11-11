@@ -9,7 +9,7 @@ install:
   - npm ci
 
 script:
-  - export COVERALLS_TOKEN
+  - export repo_token
   - npm run test
 
 after_success:

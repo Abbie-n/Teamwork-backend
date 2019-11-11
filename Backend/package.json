@@ -4,8 +4,9 @@
   "description": "All backend activities will be carried out in this folder",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
-    "lint": "eslint ."
+    "test": "nyc ./node_modules/mocha/bin/mocha || true",
+    "lint": "eslint . --fix",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "AbbieN",
   "license": "MIT",

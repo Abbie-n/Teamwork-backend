@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const auth = (request, response, next) => {
-  const token = request.headers['x-access-token'] || request.headers.authorization;
+  let token = request.headers['x-access-token'] || request.headers['authorization'];
   if (token.startsWith('Bearer ')) {
     // Remove Bearer from string
     token = token.slice(7, token.length);

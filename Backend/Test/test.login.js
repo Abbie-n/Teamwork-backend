@@ -3,6 +3,9 @@ const chai = require('chai');
 const chaihttp = require('chai-http');
 const baseUrl = 'http://localhost:5000/api/v1/auth';
 
+chai.use(chaihttp);
+chai.should();
+
 describe('user log in', () => {
     it('logs in', (done) => {
     const userDetails = {
