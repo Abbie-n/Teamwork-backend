@@ -9,7 +9,7 @@ install:
   - npm install
 
 script:
-  - npm run test
+  - npm test
 
 repo_token: $repo_token
 
