@@ -5,9 +5,6 @@ node_js:
 env:
   - API_VERSION=v1
 
-install: 
-  - npm ci
-
 script:
   - export repo_token
   - npm run test
