@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/24</span>
+        <span class='fraction'>0/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/24</span>
+        <span class='fraction'>0/25</span>
       </div>
     </div>
     <p class="quiet">
@@ -113,8 +113,7 @@
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -148,6 +147,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,8 +177,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,52 +209,51 @@ const jwt = <span class="cstat-no" title="statement not covered" >require('jsonw
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >exports.login = <span class="fstat-no" title="function not covered" >(r</span>equest, response, next) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-    const values = <span class="cstat-no" title="statement not covered" >request.body.email;</span>
-<span class="cstat-no" title="statement not covered" >    pool.query("SELECT u.userid, u.email, u.password FROM users u WHERE u.email = $1 LIMIT 1", [values], <span class="fstat-no" title="function not covered" >(e</span>rror, results) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if(results.rows.length === 0){</span>
-<span class="cstat-no" title="statement not covered" >                return response.json({</span>
-                    error: 'Invalid email'
-                });
-            }
-            
-            const token = <span class="cstat-no" title="statement not covered" >jwt.sign(</span>
-              { userId: request.body.userid },
-              process.env.TOKEN,
-              { expiresIn: '24h'}
-          );
-&nbsp;
-&nbsp;
-<span class="cstat-no" title="statement not covered" >        bcrypt.compare(request.body.password, results.rows[0].password, <span class="fstat-no" title="function not covered" >(e</span>rror, result) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            if(result === false){</span>
-<span class="cstat-no" title="statement not covered" >              return response.send({</span>
-                status: "Failed!",
-                error: 'Invalid password'
+<span class="cstat-no" title="statement not covered" >  try {</span>
+  const values = <span class="cstat-no" title="statement not covered" >request.body.email;</span>
+<span class="cstat-no" title="statement not covered" >  pool.query("SELECT u.userid, u.email, u.password FROM users u WHERE u.email = $1 LIMIT 1", [values], <span class="fstat-no" title="function not covered" >(e</span>rror, results) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if(results.rows.length === 0){</span>
+<span class="cstat-no" title="statement not covered" >        console.log(error);</span>
+<span class="cstat-no" title="statement not covered" >              return response.json({</span>
+                  error: 'Invalid email'
               });
-            }
+          }
+          
+          const token = <span class="cstat-no" title="statement not covered" >jwt.sign(</span>
+            { userId: request.body.userid },
+            process.env.TOKEN,
+            { expiresIn: '24h'}
+        );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            return response.json({</span>
-                status: 'Success!',
-                message: 'Log in Successful!',
-                token: token,
-                userid: results.rows[0].userid
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      bcrypt.compare(request.body.password, results.rows[0].password, <span class="fstat-no" title="function not covered" >(e</span>rror, result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          if(result === false){</span>
+<span class="cstat-no" title="statement not covered" >            return response.send({</span>
+              status: "Failed!",
+              error: 'Invalid password'
             });
-        });
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return response.json({</span>
+              status: 'Success!',
+              message: 'Log in Successful!',
+              token: token,
+              userid: results.rows[0].userid
+          });
       });
-    }catch (error) {
-<span class="cstat-no" title="statement not covered" >        return response.send({</span>
-            error: 'Ooops... Something went wrong!'
-        });
-    }
-}
-  
-&nbsp;</pre></td></tr>
+    });
+  }catch (error) {
+<span class="cstat-no" title="statement not covered" >      return response.send({</span>
+          error: 'Ooops... Something went wrong!'
+      });
+  }
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 11 2019 18:01:33 GMT+0100 (West Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 11 2019 19:10:47 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

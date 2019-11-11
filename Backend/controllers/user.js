@@ -27,42 +27,42 @@ exports.signup = (request, response, next) => {
 }
 
 exports.login = (request, response, next) => {
-    try {
-    const values = request.body.email;
-    pool.query("SELECT u.userid, u.email, u.password FROM users u WHERE u.email = $1 LIMIT 1", [values], (error, results) => {
-        if(results.rows.length === 0){
-                return response.json({
-                    error: 'Invalid email'
-                });
-            }
-            
-            const token = jwt.sign(
-              { userId: request.body.userid },
-              process.env.TOKEN,
-              { expiresIn: '24h'}
-          );
-
-
-        bcrypt.compare(request.body.password, results.rows[0].password, (error, result) => {
-            if(result === false){
-              return response.send({
-                status: "Failed!",
-                error: 'Invalid password'
+  try {
+  const values = request.body.email;
+  pool.query("SELECT u.userid, u.email, u.password FROM users u WHERE u.email = $1 LIMIT 1", [values], (error, results) => {
+      if(results.rows.length === 0){
+        console.log(error);
+              return response.json({
+                  error: 'Invalid email'
               });
-            }
+          }
+          
+          const token = jwt.sign(
+            { userId: request.body.userid },
+            process.env.TOKEN,
+            { expiresIn: '24h'}
+        );
 
-            return response.json({
-                status: 'Success!',
-                message: 'Log in Successful!',
-                token: token,
-                userid: results.rows[0].userid
+
+      bcrypt.compare(request.body.password, results.rows[0].password, (error, result) => {
+          if(result === false){
+            return response.send({
+              status: "Failed!",
+              error: 'Invalid password'
             });
-        });
+          }
+
+          return response.json({
+              status: 'Success!',
+              message: 'Log in Successful!',
+              token: token,
+              userid: results.rows[0].userid
+          });
       });
-    }catch (error) {
-        return response.send({
-            error: 'Ooops... Something went wrong!'
-        });
-    }
+    });
+  }catch (error) {
+      return response.send({
+          error: 'Ooops... Something went wrong!'
+      });
+  }
 }
-  

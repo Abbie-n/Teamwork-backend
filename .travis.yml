@@ -9,7 +9,7 @@ install:
   - npm install
 
 script:
-  - npm test:coveralls
+  - npm run test
 
 repo_token: $repo_token
 
