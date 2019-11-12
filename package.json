@@ -8,7 +8,8 @@
     "lint": "eslint . --fix",
     "test:coverage": "nyc npm run test && nyc report --reporter=lcov",
     "test:coveralls": "nyc npm run test && nyc report --reporter=text-lcov --coverage | coveralls",
-    "coverage": "npm run test:coveralls && npm run test:coverage"
+    "coverage": "npm run test:coveralls && npm run test:coverage",
+    "coveralls": "npm run test -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "author": "AbbieN",
   "license": "MIT",
