@@ -8,11 +8,12 @@ env:
 install: 
   - npm install
 
+before_script:
+  - ./cc-test-reporter before-build
+  
 script:
-  'true'
-
-after_success:
-  - npm run coverage
+  - npm run test:coveralls
+  - npm run test:coverage
 
 cache:
   directories:
