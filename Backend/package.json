@@ -6,8 +6,9 @@
   "scripts": {
     "test": "nyc node_modules/.bin/mocha",
     "lint": "eslint . --fix",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov --all npm run test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "test:coverage": "nyc npm run test && nyc report --reporter=lcov",
+    "test:coveralls": "nyc npm run test && nyc report --reporter=text-lcov --coverage | coveralls",
+    "coverage": "npm run test:coveralls && npm run test:coverage"
   },
   "author": "AbbieN",
   "license": "MIT",

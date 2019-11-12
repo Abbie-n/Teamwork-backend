@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaihttp = require('chai-http');
-const baseUrl = 'http://localhost:5000/api/v1/gifs';
+const baseUrl = 'http://localhost:8000/api/v1/gifs';
 require('dotenv').config();
 
 chai.use(chaihttp);
