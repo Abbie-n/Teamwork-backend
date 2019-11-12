@@ -9,8 +9,11 @@ install:
   - npm install
 
 script:
-  - npm run test:coveralls
-  - npm run test:coverage
+  - 'true'
+
+after_script:
+  - npm run coveralls
+  - npm run coverage
 
 cache:
   directories:
