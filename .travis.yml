@@ -8,13 +8,18 @@ env:
 install: 
   - npm install
 
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 script:
   - 'true'
 
 after_script:
   - npm run coveralls
   - npm run coverage
-  - ./cc-test-reporter after-build -t lcov --exit-code $TRAVIS_TEST_RESULT
   
 cache:
   directories:
