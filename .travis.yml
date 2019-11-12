@@ -8,9 +8,6 @@ env:
 install: 
   - npm install
 
-before_script:
-  - ./cc-test-reporter before-build
-  
 script:
   - npm run test:coveralls
   - npm run test:coverage
