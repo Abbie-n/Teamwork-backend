@@ -1,6 +1,7 @@
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const chai = require('chai');
 const chaihttp = require('chai-http');
+
 const baseUrl = 'http://localhost:8000/api/v1/gifs';
 require('dotenv').config();
 
@@ -8,48 +9,47 @@ chai.use(chaihttp);
 chai.should();
 
 describe('user can view a specific gif', () => {
-    it('returns a specific gif', (done) => {
+  it('returns a specific gif', (done) => {
     chai.request(baseUrl)
-        .get(process.env.GIFGETROUTE)
-        .set('authorization', process.env.TEST_TOKEN)
-        .end((error, response, body) => {
-            console.log(error);
-            expect(response.statusCode).to.equal(200);
-            done();
-         });
+      .get('/22')
+      .set('authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzM1NDAyNTgsImV4cCI6MTU3MzYyNjY1OH0.RnJeDiPgE8dskEkadRG4e9K9Bo1xhfR0YVLsD4hEzuQ')
+      .end((error, response) => {
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
+  });
 });
-})
 
 
 describe('user deletes gif', () => {
-    it('deletes gif', (done) => {
+  it('deletes gif', (done) => {
     chai.request(baseUrl)
-        .delete(process.env.GIFDELETEROUTE)
-        .set('authorization', process.env.TEST_TOKEN)
-        .end((error, response, body) => {
-            expect(response.statusCode).to.equal(200);
-            done();
-         });
+      .delete('/14')
+      .set('authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzM1NDAyNTgsImV4cCI6MTU3MzYyNjY1OH0.RnJeDiPgE8dskEkadRG4e9K9Bo1xhfR0YVLsD4hEzuQ')
+      .end((error, response) => {
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
+  });
 });
-})
 
 describe('user creates new comment', () => {
-    it('creates new comment', (done) => {
+  it('creates new comment', (done) => {
     const details = {
-        // DETAILS TO COMMENT
-        'comment': 'Test comment',
-        'authorid': process.env.AUTHORID,
-        'gifid': process.env.GIFID
+      // DETAILS TO COMMENT
+      comment: 'Test comment',
+      authorid: 'Testie3',
+      gifid: '22',
     };
     chai.request(baseUrl)
-        .post(process.env.GIFCOMMENTPOSTROUTE)
-        .send(
-           details
-        )
-        .set('authorization', process.env.TEST_TOKEN)
-        .end((error, response, body) => {
-            expect(response.statusCode).to.equal(201);
-            done();
-         });
+      .post('/22/comment')
+      .send(
+        details,
+      )
+      .set('authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzM1NDAyNTgsImV4cCI6MTU3MzYyNjY1OH0.RnJeDiPgE8dskEkadRG4e9K9Bo1xhfR0YVLsD4hEzuQ')
+      .end((error, response) => {
+        expect(response.statusCode).to.equal(201);
+        done();
+      });
+  });
 });
-})

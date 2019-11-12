@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./Routes/user');
 const gifRoutes = require('./Routes/gifs');
-const articleRoutes =  require('./Routes/articles');
+const articleRoutes = require('./Routes/articles');
 const feedsRoute = require('./Routes/feed');
 
 const app = express();
