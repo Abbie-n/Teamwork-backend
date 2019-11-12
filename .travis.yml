@@ -6,7 +6,7 @@ env:
   - API_VERSION=v1
 
 install: 
-  - npm install
+  - npm install -g mocha
 
 services:
   - postgresql
