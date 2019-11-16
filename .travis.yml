@@ -19,6 +19,10 @@ script:
 
 after_success:
   - npm run coverage
+
+addons:
+  jwt:
+     secure: <'RANDOM_TOKEN_IT_JUST_KEEPS_GOING' ENCRYPTED>
   
 cache:
   directories:
