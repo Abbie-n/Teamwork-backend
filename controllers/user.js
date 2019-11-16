@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
 /* eslint-disable no-console */
@@ -69,4 +70,59 @@ exports.login = (request, response, next) => {
       error: 'Ooops... Something went wrong!',
     });
   }
+};
+
+exports.deleteUser = (request, response, next) => {
+  const values = parseInt(request.params.id);
+  pool.query('DELETE FROM users where userid = $1', [values], (error, results) => {
+    if (error) {
+      response.status(400).json({ error: 'Failed to delete User!' });
+    } else {
+      response.status(200).json({
+        status: 'Success!',
+        Data: {
+          message: 'User deleted successfully!',
+        },
+      });
+    }
+  });
+};
+
+exports.updateUser = (request, response, next) => {
+  const id = parseInt(request.params.id);
+  bcrypt.hash(request.body.password, 10)
+    .then((hash) => {
+      const values = [request.body.username, request.body.firstname, request.body.lastname, request.body.email, hash, request.body.genderid, request.body.departmentid, request.body.jobrole_id, request.body.address];
+      pool.query('UPDATE users SET username=$1, firstname=$2, lastname=$3, email=$4, password=$5, genderid=$6, departmentid=$7, roleid=$8, address=$9', [...values, id], (error, results) => {
+        if (error) {
+          response.status(400).json({ error: 'Failed to update!' });
+        } else {
+          response.status(201).json({
+            status: 'Success',
+            Data: {
+              message: 'Article successfully updated!',
+              title: request.body.title,
+              article: request.body.article,
+            },
+          });
+        }
+      });
+    }).catch((error) => {
+      response.status(500).json({ error });
+    });
+};
+
+exports.getOneUser = (request, response, next) => {
+  const values = parseInt(request.params.id);
+  pool.query(`SELECT * FROM users u
+    WHERE u.userid = $1`, [values], (error, results) => {
+    if (error || results.rows < 1) {
+      response.status(404).json({ error: 'User not found!' });
+    } else {
+      response.status(200).json({
+        status: 'Success',
+        Data: results.rows,
+      });
+    }
+  });
 };

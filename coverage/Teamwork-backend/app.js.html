@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,16 +35,16 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -64,49 +64,52 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
-const bodyParser = <span class="cstat-no" title="statement not covered" >require('body-parser');</span>
-const userRoutes = <span class="cstat-no" title="statement not covered" >require('./Routes/user');</span>
-const gifRoutes = <span class="cstat-no" title="statement not covered" >require('./Routes/gifs');</span>
-const articleRoutes =  <span class="cstat-no" title="statement not covered" >require('./Routes/articles');</span>
-const feedsRoute = <span class="cstat-no" title="statement not covered" >require('./Routes/feed');</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
+const bodyParser = require('body-parser');
+const userRoutes = require('./Routes/user');
+const gifRoutes = require('./Routes/gifs');
+const articleRoutes = require('./Routes/articles');
+const feedsRoute = require('./Routes/feed');
 &nbsp;
-const app = <span class="cstat-no" title="statement not covered" >express();</span>
+const app = express();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >app.use(bodyParser.json());</span>
-<span class="cstat-no" title="statement not covered" >app.use(bodyParser.urlencoded({ extended: true }));</span>
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 &nbsp;
-<span class="cstat-no" title="statement not covered" >app.use('/api/v1/auth', userRoutes);</span>
-<span class="cstat-no" title="statement not covered" >app.use('/api/v1/gifs', gifRoutes);</span>
-<span class="cstat-no" title="statement not covered" >app.use('/api/v1/articles', articleRoutes);</span>
-<span class="cstat-no" title="statement not covered" >app.use('/api/v1/feed', feedsRoute);</span>
+app.use('/api/v1/auth', userRoutes);
+app.use('/api/v1/gifs', gifRoutes);
+app.use('/api/v1/articles', articleRoutes);
+app.use('/api/v1/feed', feedsRoute);
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = app;</span></pre></td></tr>
+module.exports = app;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 12 2019 08:00:08 GMT+0100 (West Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Nov 16 2019 06:20:25 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="..\prettify.js"></script>

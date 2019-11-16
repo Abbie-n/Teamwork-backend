@@ -64,6 +64,22 @@ exports.createComment = (request, response, next) => {
   });
 };
 
+exports.deleteComment = (request, response, next) => {
+  const values = parseInt(request.params.id);
+  pool.query('DELETE FROM gifcomments where commentid = $1', [values], (error, results) => {
+    if (error) {
+      response.status(400).json({ error: 'Failed to delete Comment!' });
+    } else {
+      response.status(200).json({
+        status: 'Success!',
+        Data: {
+          message: 'Comment deleted successfully!',
+        },
+      });
+    }
+  });
+};
+
 exports.getOneGif = (request, response, next) => {
   const values = parseInt(request.params.id);
   pool.query(`SELECT g.gifid, g.created_on, g.title, g.post, c.commentid, c.comment, c.authorid FROM gifs g

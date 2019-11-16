@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable no-alert */
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
 const { pool } = require('../pgconnect');
@@ -25,7 +27,7 @@ exports.createArticle = (request, response, next) => {
 exports.updateArticle = (request, response, next) => {
   const id = parseInt(request.params.id);
   const values = Object.values(request.body);
-  pool.query('UPDATE articles SET authorid=$1, title=$2, article=$3 WHERE articleid=$4',
+  pool.query('UPDATE articles SET authorid=$1, title=$2, article=$3, WHERE articleid=$4',
     [...values, id], (error, results) => {
       if (error) {
         response.status(400).json({ error: 'Failed to update!' });
@@ -79,9 +81,25 @@ exports.createComment = (request, response, next) => {
   });
 };
 
+exports.deleteComment = (request, response, next) => {
+  const values = parseInt(request.params.id);
+  pool.query('DELETE FROM articlecomments where commentid = $1', [values], (error, results) => {
+    if (error) {
+      response.status(400).json({ error: 'Failed to delete Comment!' });
+    } else {
+      response.status(200).json({
+        status: 'Success!',
+        Data: {
+          message: 'Comment deleted successfully!',
+        },
+      });
+    }
+  });
+};
+
 exports.getOneArticle = (request, response, next) => {
   const values = parseInt(request.params.id);
-  pool.query(`SELECT a.articleid, a.created_on, a.title, a.post, c.commentid, c.comment, c.authorid FROM articles a
+  pool.query(`SELECT a.articleid, a.created_on, a.title, a.post, a.appropriate, c.commentid, c.comment, c.authorid FROM articles a
     JOIN articlecomments c
     ON a.articleid = c.articleid
     WHERE a.articleid = $1`, [values], (error, results) => {
@@ -90,7 +108,38 @@ exports.getOneArticle = (request, response, next) => {
     } else {
       response.status(200).json({
         status: 'Success',
-        Data: results.rows,
+        Article: {
+          articleid: results.rows[0].articleid,
+          title: results.rows[0].title,
+          article: results.rows[0].post
+        },
+        comments: [
+          {
+            commentid: results.rows[0].commentid,
+            comment: results.rows[0].comment,
+            authorid: results.rows[0].authorid,
+          },
+          {
+            commentid: results.rows[1].commentid,
+            comment: results.rows[1].comment,
+            authorid: results.rows[1].authorid
+          },
+        ]
+      });
+    }
+  });
+};
+
+exports.markInappropriate = (request, response, next) => {
+  const id = parseInt(request.params.id);
+  const values = request.body.appropriate;
+  pool.query('UPDATE articles SET appropriate=$1 WHERE articleid=$2', [values, id], (error, results) => {
+    if (error) {
+      response.status(400).json({ error: 'Error' });
+    } else {
+      response.status(200).json({
+        status: 'Success',
+        message: 'Thank you for the report!',
       });
     }
   });

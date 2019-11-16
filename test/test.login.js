@@ -1,8 +1,7 @@
 const { expect } = require('chai');
 const chai = require('chai');
 const chaihttp = require('chai-http');
-
-const baseUrl = 'http://localhost:8000/api/v1/auth';
+const app = require('../app');
 require('dotenv').config();
 
 chai.use(chaihttp);
@@ -15,8 +14,8 @@ describe('user log in', () => {
       email: 'Testie3@test.com',
       password: 'Testieequalstruthy',
     };
-    chai.request(baseUrl)
-      .post('/login')
+    chai.request(app)
+      .post('/api/v1/auth/login')
       .send(
         userDetails,
       )
