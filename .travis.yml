@@ -15,8 +15,8 @@ before_script:
   - travis_wait 30 npm install
   - psql -c 'create database teamworkdb;' -U postgres
   - travis_wait npm install
-  - node database/queriesdb.js createAllTables
-  - travis_wait 30 node database/queriesdb.js insertAllData
+  - node queriesdb.js createAllTables
+  - travis_wait 30 node queriesdb.js insertAllData
 
 script:
   - 'true'
