@@ -12,17 +12,17 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - travis_wait 30 npm install
+  - psql -c 'create database teamworkdb;' -U postgres
+  - travis_wait npm install
+  - node database/queriesdb.js createAllTables
+  - travis_wait 30 node database/queriesdb.js insertAllData
 
 script:
   - 'true'
 
 after_success:
   - npm run coverage
-
-addons:
-  jwt:
-     secure: <'RANDOM_TOKEN_IT_JUST_KEEPS_GOING' ENCRYPTED>
   
 cache:
   directories:
