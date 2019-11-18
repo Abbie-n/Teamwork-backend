@@ -15,14 +15,17 @@ before_script:
   - travis_wait 30 npm install
   - psql -c 'create database teamworkdb;' -U postgres
   - travis_wait npm install
-  - node queriesdb.js createAllTables
-  - travis_wait 30 node queriesdb.js insertAllData
+  - node queriesdb.sql createAllTables
+  - travis_wait 30 node queriesdb.sql insertAllData
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - 'true'
 
 after_success:
   - npm run coverage
+  - ./cc-test-reporter after-build --exit-code $Test reporter ID
   
 cache:
   directories:
