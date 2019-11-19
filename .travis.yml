@@ -13,9 +13,7 @@ services:
 
 before_script:
   - travis_wait 30 npm install
-  - psql -c 'create database teamworkdb;' -U postgres
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
   - 'true'
