@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">61.11% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>18/18</span>
+        <span class='fraction'>11/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,21 +30,21 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>2/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">61.11% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>18/18</span>
+        <span class='fraction'>11/18</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,74 +98,74 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { expect } = require('chai');
 const chai = require('chai');
 const chaihttp = require('chai-http');
-const app = require('../app');
+const app = require('../server');
 require('dotenv').config();
 &nbsp;
 chai.use(chaihttp);
 chai.should();
 &nbsp;
 describe('user can view a specific article', () =&gt; {
-  it('returns a specfic article', (done) =&gt; {
-    chai.request(app)
+  it('returns a specfic article', <span class="fstat-no" title="function not covered" >(d</span>one) =&gt; {
+<span class="cstat-no" title="statement not covered" >    chai.request(app)</span>
       .get('/api/v1/articles/6')
-      .set('authorization', process.env.TEST_TOKEN)
-      .end((error, response) =&gt; {
-        expect(response.status).to.equal(200);
-        done();
+      .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
+      .end(<span class="fstat-no" title="function not covered" >(e</span>rror, response) =&gt; {
+<span class="cstat-no" title="statement not covered" >        expect(response.status).to.equal(200);</span>
+<span class="cstat-no" title="statement not covered" >        done();</span>
       });
   });
 });
 &nbsp;
 describe('user creates new comment', () =&gt; {
-  it('creates new comment', (done) =&gt; {
-    const details = {
+  it('creates new comment', <span class="fstat-no" title="function not covered" >(d</span>one) =&gt; {
+    const details = <span class="cstat-no" title="statement not covered" >{</span>
       // DETAILS TO COMMENT
       comment: 'Test comment',
       authorid: 'Testie3',
       articleid: '6',
     };
-    chai.request(app)
+<span class="cstat-no" title="statement not covered" >    chai.request(app)</span>
       .post('/api/v1/articles/6/comment')
       .send(
         details,
       )
-      .set('authorization', process.env.TEST_TOKEN)
-      .end((error, response) =&gt; {
-        expect(response.statusCode).to.equal(201);
-        done();
+      .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
+      .end(<span class="fstat-no" title="function not covered" >(e</span>rror, response) =&gt; {
+<span class="cstat-no" title="statement not covered" >        expect(response.statusCode).to.equal(201);</span>
+<span class="cstat-no" title="statement not covered" >        done();</span>
       });
   });
 });
@@ -175,7 +175,7 @@ describe('user creates new comment', () =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Nov 16 2019 06:20:25 GMT+0100 (West Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 19 2019 21:04:41 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>
