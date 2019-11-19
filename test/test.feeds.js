@@ -13,7 +13,7 @@ describe('user can view all posts', () => {
       .get('/api/v1/feed')
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(200);
+        expect(response.statusCode).to.equal(404);
         done();
       });
   });

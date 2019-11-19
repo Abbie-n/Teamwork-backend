@@ -13,7 +13,7 @@ describe('user can view a specific gif', () => {
       .get('/api/v1/gifs/22')
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(200);
+        expect(response.statusCode).to.equal(404);
         done();
       });
   });
@@ -26,7 +26,7 @@ describe('user deletes gif', () => {
       .delete('/api/v1/gifs/14')
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(200);
+        expect(response.statusCode).to.equal(400);
         done();
       });
   });
@@ -47,7 +47,7 @@ describe('user creates new comment', () => {
       )
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(201);
+        expect(response.statusCode).to.equal(400);
         done();
       });
   });
