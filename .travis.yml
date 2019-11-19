@@ -14,9 +14,6 @@ services:
 before_script:
   - travis_wait 30 npm install
   - psql -c 'create database teamworkdb;' -U postgres
-  - travis_wait npm install
-  - node queriesdb.sql createAllTables
-  - travis_wait 30 node queriesdb.sql insertAllData
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
