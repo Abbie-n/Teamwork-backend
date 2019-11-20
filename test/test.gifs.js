@@ -11,9 +11,9 @@ describe('user can view a specific gif', () => {
   it('returns a specific gif', (done) => {
     chai.request(app)
       .get('/api/v1/gifs/22')
-      .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
+      .set('authorization', process.env.TEST_TOKEN)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(404);
+        expect(response.statusCode).to.equal(200);
         done();
       });
   });
@@ -26,7 +26,7 @@ describe('user deletes gif', () => {
       .delete('/api/v1/gifs/14')
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(400);
+        expect(response.statusCode).to.equal(200);
         done();
       });
   });
@@ -47,7 +47,7 @@ describe('user creates new comment', () => {
       )
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(400);
+        expect(response.statusCode).to.equal(201);
         done();
       });
   });

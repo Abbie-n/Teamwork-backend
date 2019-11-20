@@ -13,7 +13,7 @@ describe('user can view a specific article', () => {
       .get('/api/v1/articles/6')
       .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
       .end((error, response) => {
-        expect(response.status).to.equal(404);
+        expect(response.status).to.equal(200);
         done();
       });
   });
@@ -32,9 +32,9 @@ describe('user creates new comment', () => {
       .send(
         details,
       )
-      .set('authorization', `Bearer ${process.env.TEST_TOKEN}`)
+      .set('authorization', process.env.TEST_TOKEN)
       .end((error, response) => {
-        expect(response.statusCode).to.equal(400);
+        expect(response.statusCode).to.equal(201);
         done();
       });
   });

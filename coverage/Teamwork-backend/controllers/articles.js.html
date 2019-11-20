@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">17.78% </span>
+        <span class="strong">35.56% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/45</span>
+        <span class='fraction'>16/45</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">25% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>4/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">28.57% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>4/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">17.78% </span>
+        <span class="strong">35.56% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/45</span>
+        <span class='fraction'>16/45</span>
       </div>
     </div>
     <p class="quiet">
@@ -255,14 +255,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -292,15 +292,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -400,15 +400,15 @@ exports.deleteOneArticle = <span class="fstat-no" title="function not covered" >
   });
 };
 &nbsp;
-exports.createComment = <span class="fstat-no" title="function not covered" >(r</span>equest, response, next) =&gt; {
-  const values = <span class="cstat-no" title="statement not covered" >Object.values(request.body);</span>
-<span class="cstat-no" title="statement not covered" >  pool.query(`INSERT INTO articlecomments (created_on, comment, authorid, articleid)</span>
+exports.createComment = (request, response, next) =&gt; {
+  const values = Object.values(request.body);
+  pool.query(`INSERT INTO articlecomments (created_on, comment, authorid, articleid)
         VALUES (now(), $1, $2, $3)`,
-  [...values], <span class="fstat-no" title="function not covered" >(e</span>rror, results) =&gt; {
-<span class="cstat-no" title="statement not covered" >    if (error) {</span>
+  [...values], (error, results) =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {
 <span class="cstat-no" title="statement not covered" >      response.status(400).json({ error: 'Failed to post comment!' });</span>
     } else {
-<span class="cstat-no" title="statement not covered" >      response.status(201).json({</span>
+      response.status(201).json({
         status: 'success',
         Data: {
           message: 'Comment successfully created!',
@@ -437,16 +437,16 @@ exports.deleteComment = <span class="fstat-no" title="function not covered" >(r<
   });
 };
 &nbsp;
-exports.getOneArticle = <span class="fstat-no" title="function not covered" >(r</span>equest, response, next) =&gt; {
-  const values = <span class="cstat-no" title="statement not covered" >parseInt(request.params.id);</span>
-<span class="cstat-no" title="statement not covered" >  pool.query(`SELECT a.articleid, a.created_on, a.title, a.post, a.appropriate, c.commentid, c.comment, c.authorid FROM articles a</span>
+exports.getOneArticle = (request, response, next) =&gt; {
+  const values = parseInt(request.params.id);
+  pool.query(`SELECT a.articleid, a.created_on, a.title, a.post, a.appropriate, c.commentid, c.comment, c.authorid FROM articles a
     JOIN articlecomments c
     ON a.articleid = c.articleid
-    WHERE a.articleid = $1`, [values], <span class="fstat-no" title="function not covered" >(e</span>rror, results) =&gt; {
-<span class="cstat-no" title="statement not covered" >    if (error || results.rows &lt; 1) {</span>
+    WHERE a.articleid = $1`, [values], (error, results) =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (error || results.rows &lt; 1) {
 <span class="cstat-no" title="statement not covered" >      response.status(404).json({ error: 'Article not found!' });</span>
     } else {
-<span class="cstat-no" title="statement not covered" >      response.status(200).json({</span>
+      response.status(200).json({
         status: 'Success',
         Article: {
           articleid: results.rows[0].articleid,
@@ -490,7 +490,7 @@ exports.markInappropriate = <span class="fstat-no" title="function not covered" 
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 19 2019 21:04:41 GMT+0100 (West Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 20 2019 23:01:33 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>
