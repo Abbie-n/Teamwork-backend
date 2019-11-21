@@ -4,7 +4,7 @@
   "description": "All backend activities will be carried out in this folder",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "nyc node_modules/.bin/mocha",
     "lint": "eslint . --fix",
     "test:coverage": "nyc npm run test && nyc report --reporter=lcov",
@@ -37,5 +37,9 @@
     "multer": "^1.4.2",
     "nodemon": "^1.19.4",
     "pg": "^7.12.1"
+  },
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.12.0"
   }
 }
